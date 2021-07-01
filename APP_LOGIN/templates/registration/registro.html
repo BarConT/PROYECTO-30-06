@@ -1,0 +1,40 @@
+{% extends 'layout.html'%}
+{% load static %}
+
+{% block titulo %}Registro{% endblock %}
+
+{% block cuerpo %}
+{% load crispy_forms_tags %}
+
+{% if user.is_authenticated %}
+<h1>Ya estás registrado</h1>
+{% else %}
+
+{% if form.errors %}
+<p>Error al registrar.{{ form.errors }}</p>
+{% endif %}
+
+<br>
+
+<div class="container">
+	<div class="row">
+		<div class="col-lg-8 offset-lg-2">
+			<div class="card">
+				<div class="card-body">
+					<h1>REGISTRARSE EN NUESTRA WEB</h1>
+					<hr>
+					<form action="" method="POST">
+						{% csrf_token %}
+						{{ form | crispy }}
+						<input type="submit" value="REGISTRARSE" class="btn btn-info">
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<br>
+
+{% endif %}
+{% endblock %}
