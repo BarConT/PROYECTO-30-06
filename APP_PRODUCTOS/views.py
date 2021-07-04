@@ -1,11 +1,23 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Producto
+from .models import Producto, Categoria
 from .forms import ProductoForm 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, permission_required
+from django.core.paginator import Paginator
+from django.http import Http404
 
 # Create your views here.
 
+def visualizar(request, id):
+    producto = Producto.objects.all().filter(id=id)
+    print(producto)
+    
+
+    data = {
+            'producto': producto 
+            }
+
+    return render(request, 'visualizar.html', data)
 
 @permission_required('APP_PRODUCTOS.add_producto')
 def agregar(request):
@@ -22,17 +34,6 @@ def agregar(request):
         else:
             data["form"] = formulario
     return render(request, 'agregar.html', data)
-
-def visualizar(request, id):
-    producto = Producto.objects.all().filter(id=id)
-    print(producto)
-    
-
-    data = {
-            'producto': producto 
-            }
-
-    return render(request, 'visualizar.html', data)
 
 @permission_required('APP_PRODUCTOS.change_producto')
 def editar(request, id):
@@ -60,5 +61,25 @@ def borrar(request, id):
     messages.success(request, "Eliminado correctamente")
     return redirect(to="principal")
 
+def categoria(request, categoria_id):
 
+    categoria = Categoria.objects.get(id=categoria_id)
+    productos = Producto.objects.filter(categoria=categoria)
+
+    page = request.GET.get('page', 1)
+    
+    try:
+        paginator = Paginator(productos, 6)
+        productos = paginator.page(page)
+
+    except:
+        raise Http404
+
+    data = {
+            'categoria': categoria,
+            'entity': productos,
+            'paginator': paginator,
+            'page': request.GET.get('page', 1),
+            }
+    return render(request, 'categoria.html', data)
 

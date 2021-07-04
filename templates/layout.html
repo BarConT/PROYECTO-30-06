@@ -58,9 +58,9 @@
 								CATEGORIAS
 							</a>
 							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-								<a class="dropdown-item" href="#">Celulares</a>
-								<a class="dropdown-item" href="#">Tablet</a>
-								<a class="dropdown-item" href="#">Notebook</a>
+								<a class="dropdown-item" href="{% url 'categoria' 1 %}">Celulares</a>
+								<a class="dropdown-item" href="{% url 'categoria' 2 %}">Tablet</a>
+								<a class="dropdown-item" href="{% url 'categoria' 3 %}">Notebook</a>
 							</div>
 						</li>
 						<li class="nav-item {% if request.path == '/acerca/' %}active{% endif %}">
