@@ -11,7 +11,7 @@ class Categoria(models.Model):
 
 class Producto(models.Model):
     titulo = models.CharField(max_length=100)
-    imagen = models.ImageField()
+    imagen = models.ImageField(upload_to="productos", null="True")
     descripcion = models.CharField(max_length=100)
     precio = models.IntegerField()
     categoria = models.ForeignKey(Categoria, on_delete=models.PROTECT)
@@ -19,5 +19,7 @@ class Producto(models.Model):
     def __str__(self):
         return self.titulo
 
-class Carrito(models.Model):
+"""class Carrito(models.Model):
      usuario = models.OneToOneField(User, on_delete=models.CASCADE)
+     lista_de_Productos"""
+     

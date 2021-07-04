@@ -1,0 +1,62 @@
+{% extends 'layout.html' %}
+
+{% block titulo %}
+{% for p in producto %}
+{{ p.titulo }}
+{% endfor %}
+{% endblock %}
+
+{% block cuerpo %}
+
+<!-- SWEET ALERT -->
+<script>
+	function eliminarProducto(id) {
+		Swal.fire({
+			"title": "¿Estás seguro?",
+			"text": "Esta acción no se puede deshacer",
+			"icon": "question",
+			"showCancelButton": true,
+			"cancelButtonText": "No, cancelar",
+			"confirmButtonText": "Si, eliminar",
+			"reverseButtons": true,
+			"confirmButtonColor": "#dc3545"
+		})
+			.then(function(result){
+				if (result.isConfirmed){
+					window.location.href = '/borrar/'+id+'/'
+				}
+			})
+	}
+</script>
+
+{% load humanize %}
+
+<br>
+
+<div class="row">
+	<div class="col-12 col-md-6	offset-md-3">
+		<div class="card">
+			<div class="card-body">
+
+				{% for p in producto %}
+				<h2>{{ p.titulo }}</h2>
+				<img src="{{ p.imagen.url }}" alt="">
+				<h3>{{ p.descripcion }}</h3>
+				{{ p.categoria }}
+				<div>
+					<h4>Precio: ${{ p.precio | intcomma }}</h4>
+					<input type="submit" value="AGREGAR AL CARRITO">
+					<a href="{% url 'editar' p.id %}" class="btn btn-info btn-sm">EDITAR</a>
+					<a href="#" onclick="eliminarProducto({{ p.id }})" class="btn btn-danger btn-sm">BORRAR</a>
+				</div>
+				{% endfor %}
+
+			</div>
+		</div>
+	</div>
+</div>
+
+<br>
+
+{% endblock %}
+

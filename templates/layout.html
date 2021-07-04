@@ -28,10 +28,10 @@
 						<li>@{{ user.get_username }}</li>
 						<li><a href="{% url 'logout'%}?next={{request.path}}" class="btn btn-info">DESCONECTAR</a></li>
 						{% else %}
-						<li><a href="{% url 'login'%}?next={{request.path}}" class="btn btn-info">LOGIN</a></li>
-						<li><a href="{% url 'registro' %}" class="btn btn-info">REGISTRO</a></li>
+						<li><a href="{% url 'login'%}?next={{request.path}}" class="btn btn-info btn-sm">LOGIN</a></li>
+						<li><a href="{% url 'registro' %}" class="btn btn-info btn-sm">REGISTRO</a></li>
 						{% endif %}
-						<li><a href="#" class="btn btn-info">CARRITO</a></li>
+						<li><a href="#" class="btn btn-info btn-sm">CARRITO</a></li>
 					</ul>
 				</nav>
 			</div>
@@ -47,7 +47,7 @@
 
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 					<ul class="navbar-nav mr-auto">
-						<li class="nav-item active">
+						<li class="nav-item {% if request.path == '/' %}active{% endif %}">
 							<a class="nav-link" href="{% url 'principal' %}">HOME</a>
 						</li>
 						<li class="nav-item dropdown">
@@ -55,20 +55,19 @@
 								CATEGORIAS
 							</a>
 							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-								<a class="dropdown-item" href="#">Action</a>
-								<a class="dropdown-item" href="#">Another action</a>
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="#">Something else here</a>
+								<a class="dropdown-item" href="#">Celulares</a>
+								<a class="dropdown-item" href="#">Tablet</a>
+								<a class="dropdown-item" href="#">Notebook</a>
 							</div>
 						</li>
-						<li class="nav-item">
+						<li class="nav-item {% if request.path == '/acerca/' %}active{% endif %}">
 							<a class="nav-link" href="{% url 'acerca_de' %}">ACERCA DE...</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="#">CONTACTO</a>
 						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="#">NUEVO PRODUCTO</a>
+						<li class="nav-item {% if request.path == '/agregar/' %}active{% endif %}">
+							<a class="nav-link" href="{% url 'agregar' %}">NUEVO PRODUCTO</a>
 						</li>
 					</ul>
 					<form class="form-inline my-2 my-lg-0">
@@ -78,8 +77,6 @@
 				</div>
 			</nav>
 		</div>
-
-
 
 		<!-- Cuerpo -->
 		<div id="contenido">
@@ -96,6 +93,21 @@
 				<p>Diego Jesús Barale Conte</p>
 			</div>
 		</footer>
+
+		<!-- SWEET ALERT -->
+		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+			{% if messages %}
+				{% for message in messages %}
+				<script>
+					Swal.fire({
+						"title": "Felicitaciones",
+						"text": "{{ message }}",
+						"icon": "success"
+					})	
+				</script>
+				{% endfor %}
+			{% endif %}
 
 	</body>
 </html>

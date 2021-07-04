@@ -58,6 +58,8 @@ nav > ul > li > a:hover {
 /* Cuerpo */
 #contenido {
 	min-height: calc(100vh - 340px);
+	width: 90%;
+	margin: auto;
 }
 
 

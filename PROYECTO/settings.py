@@ -27,6 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
 
 # Application definition
 
@@ -39,9 +40,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'APP_PRINCIPAL',
     'APP_LOGIN',
-    'APP_PRODUCTOS',
+    'APP_PRODUCTOS.apps.AppProductosConfig',
     'APP_CARRITO',
     'crispy_forms',
+    'django.contrib.humanize',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -130,6 +132,9 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media' 
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'

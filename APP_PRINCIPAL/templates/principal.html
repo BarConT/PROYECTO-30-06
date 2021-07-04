@@ -4,6 +4,40 @@
 {% block titulo %}Principal{% endblock %}
 {% block cuerpo %}
 
-<h1>Probando principal</h1>
+{% load humanize %}
+<h1>Menú</h1>
+{% if page == '1' or page == 1 %}
+<div class="container">
+	<div class="row">
+		{% for producto in tres_productos %}
+	<div class="card m-3" style="width: 18rem;">
+			<img src="{{ producto.imagen.url }}" class="card-img-top" alt="{{ producto.titulo }}" style="min-height: 280px">
+			<div class="card-body">
+				<h5 class="card-title">{{ producto.titulo | capfirst}}</h5>
+				<p class="card-text">{{ producto.descripcion }}</p>
+				<h3>${{ producto.precio | intcomma }}</h3>
+				<p>{{ producto.categoria | upper }}</p>
+				<a href="{% url 'visualizar' producto.id %}" class="btn btn-primary">VER PRODUCTO</a>
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+
+</div>
+{% endif %}
+
+{% for producto in entity %}
+<ul>
+	<li>
+		{{ producto.titulo | upper}}
+		{{ producto.descripcion }}
+		<a href="{% url 'visualizar' producto.id %}" class="btn btn-primary">VER PRODUCTO</a>
+	</li>
+</ul>
+{% endfor %}
+
+<div class="paginator">
+	{% include 'paginator.html' %}
+</div>
 
 {% endblock %}
