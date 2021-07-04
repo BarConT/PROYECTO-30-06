@@ -17,18 +17,11 @@
 					<p>Tu nombre de usuario y contraseña no coinciden. Inténtalo de nuevo.</p>
 					{% endif %}
 
-					{% if next %}
-					{% if user.is_authenticated %}
-					<p>Tu cuenta no tiene acceso a esta página. Para proceder,
-					por favor inicie sesión con una cuenta que tenga acceso </p>
-					{% else %}
-					<p>Por favor, registrate para ver esta página.</p>
-					{% endif %}
-					{% endif %}
 					<form action="" method="POST">
 						{% csrf_token %}
 						{{ form | crispy }}
 						<input type="submit" value="LOGIN" class="btn btn-info">
+						<input type="hidden" name="next" value="{{ next }}" />
 						<a href="{% url 'registro' %}" class="btn btn-info">REGISTRARSE</a>
 					</form>
 				</div>

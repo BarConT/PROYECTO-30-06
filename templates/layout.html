@@ -25,13 +25,16 @@
 				<nav>
 					<ul>
 						{% if user.is_authenticated %}
-						<li>@{{ user.get_username }}</li>
-						<li><a href="{% url 'logout'%}?next={{request.path}}" class="btn btn-info">DESCONECTAR</a></li>
+						<li>@{{ user.username }}</li>
+						<li><a href="{% url 'logout'%}?next={{request.path}}" class="btn btn-info btn-sm">DESCONECTAR</a></li>
 						{% else %}
 						<li><a href="{% url 'login'%}?next={{request.path}}" class="btn btn-info btn-sm">LOGIN</a></li>
 						<li><a href="{% url 'registro' %}" class="btn btn-info btn-sm">REGISTRO</a></li>
 						{% endif %}
+					{% if perms.APP_PRODUCTOS.change_producto %}
+					{% else %}
 						<li><a href="#" class="btn btn-info btn-sm">CARRITO</a></li>
+						{% endif %}
 					</ul>
 				</nav>
 			</div>
@@ -66,13 +69,15 @@
 						<li class="nav-item">
 							<a class="nav-link" href="#">CONTACTO</a>
 						</li>
+					{% if perms.APP_PRODUCTOS.add_producto %}
 						<li class="nav-item {% if request.path == '/agregar/' %}active{% endif %}">
 							<a class="nav-link" href="{% url 'agregar' %}">NUEVO PRODUCTO</a>
 						</li>
+						{% endif %}
 					</ul>
 					<form class="form-inline my-2 my-lg-0">
 						<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-						<!--button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button-->
+						<button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
 					</form>
 				</div>
 			</nav>

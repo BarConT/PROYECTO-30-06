@@ -2,10 +2,12 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Producto
 from .forms import ProductoForm 
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required, permission_required
 
 # Create your views here.
 
 
+@permission_required('APP_PRODUCTOS.add_producto')
 def agregar(request):
     data = {
             'form': ProductoForm()
@@ -32,6 +34,7 @@ def visualizar(request, id):
 
     return render(request, 'visualizar.html', data)
 
+@permission_required('APP_PRODUCTOS.change_producto')
 def editar(request, id):
 
     producto = get_object_or_404(Producto, id=id)
@@ -50,6 +53,7 @@ def editar(request, id):
 
     return render(request, 'editar.html', data)
 
+@permission_required('APP_PRODUCTOS.delete_producto')
 def borrar(request, id):
     producto = get_object_or_404(Producto, id=id)
     producto.delete()

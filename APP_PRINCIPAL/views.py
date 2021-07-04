@@ -1,10 +1,7 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import render
 from APP_PRODUCTOS.models import Producto
 from django.core.paginator import Paginator
 from django.http import Http404
-
-#from django.contrib.auth.decorators import login_required
-#from django.contrib.auth import authenticate, login
 
 # Create your views here.
 
@@ -15,7 +12,7 @@ def principal(request):
     page = request.GET.get('page', 1)
     
     try:
-        paginator = Paginator(resto_productos, 10)
+        paginator = Paginator(resto_productos, 1)
         resto_productos = paginator.page(page)
 
     except:
@@ -30,7 +27,6 @@ def principal(request):
 
     return render(request, './principal.html', data)
 
-#@login_required
 def acerca_de(request):
     return render(request, './acerca_de.html')
 
