@@ -40,7 +40,7 @@
 						{% endif %}
 						{% if perms.APP_PRODUCTOS.change_producto %}
 						{% else %}
-						<li><a href="#" class="btn btn-info btn-sm">CARRITO</a></li>
+						<li><a href="{% url 'carrito' %}" class="btn btn-info btn-sm">CARRITO</a></li>
 						{% endif %}
 					</ul>
 				</nav>
