@@ -1,16 +1,18 @@
 {% extends 'layout.html'%}
-{% load static %}
 
 {% block titulo %}Principal{% endblock %}
 {% block cuerpo %}
 
 {% load humanize %}
-<h1>Menú</h1>
-{% if page == '1' or page == 1 %}
+
+<br>
+
 <div class="container">
-	<div class="row">
+	{% if page == '1' or page == 1 %}
+	<h2>Últimos productos</h2>
+	<div class="row d-flex justify-content-between">
 		{% for producto in tres_productos %}
-	<div class="card m-3" style="width: 18rem;">
+		<div class="card m-3" style="width: 18rem;">
 			<img src="{{ producto.imagen.url }}" class="card-img-top" alt="{{ producto.titulo }}" style="min-height: 280px">
 			<div class="card-body">
 				<h5 class="card-title">{{ producto.titulo | capfirst}}</h5>
@@ -21,18 +23,24 @@
 		{% endfor %}
 	</div>
 
-</div>
-{% endif %}
+	{% endif %}
+	<h2>Más productos</h2>
+	<div class="list-group">
+		{% for producto in entity %}
+		<a href="{% url 'visualizar' producto.id %}" class="list-group-item list-group-item-action ">
+			<div class="d-flex w-100 justify-content-between">
+				<div>
+					<h5 class="mb-1">{{ producto.titulo }}</h5>
+					<p class="mb-1">{{ producto.descripcion }}</p>
+					<small>${{ producto.precio | intcomma }}</small>
+				</div>
+				<img src="{{ producto.imagen.url }}" alt="" style="width:100px">
+			</div>
+		</a>
+		{% endfor %}
+	</div>
 
-{% for producto in entity %}
-<ul>
-	<li>
-		{{ producto.titulo | upper}}
-		{{ producto.descripcion }}
-		<a href="{% url 'visualizar' producto.id %}" class="btn btn-primary">VER PRODUCTO</a>
-	</li>
-</ul>
-{% endfor %}
+</div>
 
 <hr>
 

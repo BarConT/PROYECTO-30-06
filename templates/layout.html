@@ -11,6 +11,11 @@
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
 
 		{% load static %}
+
+		<!-- FAVICON -->
+		<link rel="icon" type="image/png" href="{% static 'img/favicon-32x32.png'%}" sizes="32x32" />
+		<link rel="icon" type="image/png" href="{% static 'img/favicon-16x16.png'%}" sizes="16x16" />
+
 		<link rel="stylesheet" href="{% static 'css/estilos.css'%}">
 	</head>
 	<body>
@@ -18,7 +23,9 @@
 		<!-- Encabezado -->
 		<header>
 			<div class="contenedor-logo">
-				<img src="{% static 'img/logo.png' %}" alt="Logo" class="logo">
+				<a href="{% url 'principal' %}">
+					<img src="{% static 'img/logo.png' %}" alt="Logo" class="logo">
+				</a>
 				<h2>Jaguarete Kaa S.A.</h2>
 			</div>
 			<div class="botones-login">
@@ -31,8 +38,8 @@
 						<li><a href="{% url 'login'%}?next={{request.path}}" class="btn btn-info btn-sm">LOGIN</a></li>
 						<li><a href="{% url 'registro' %}" class="btn btn-info btn-sm">REGISTRO</a></li>
 						{% endif %}
-					{% if perms.APP_PRODUCTOS.change_producto %}
-					{% else %}
+						{% if perms.APP_PRODUCTOS.change_producto %}
+						{% else %}
 						<li><a href="#" class="btn btn-info btn-sm">CARRITO</a></li>
 						{% endif %}
 					</ul>
@@ -67,16 +74,16 @@
 							<a class="nav-link" href="{% url 'acerca_de' %}">ACERCA DE...</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#">CONTACTO</a>
+							<a class="nav-link" href="mailto:jaguarete@gmail.com">CONTACTO</a>
 						</li>
-					{% if perms.APP_PRODUCTOS.add_producto %}
+						{% if perms.APP_PRODUCTOS.add_producto %}
 						<li class="nav-item {% if request.path == '/agregar/' %}active{% endif %}">
 							<a class="nav-link" href="{% url 'agregar' %}">NUEVO PRODUCTO</a>
 						</li>
 						{% endif %}
 					</ul>
-					<form class="form-inline my-2 my-lg-0">
-						<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+					<form method="GET" action="{% url 'buscar' %}" class="form-inline my-2 my-lg-0">
+						<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="buscar">
 						<button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
 					</form>
 				</div>
@@ -102,17 +109,17 @@
 		<!-- SWEET ALERT -->
 		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-			{% if messages %}
-				{% for message in messages %}
-				<script>
-					Swal.fire({
-						"title": "Felicitaciones",
-						"text": "{{ message }}",
-						"icon": "success"
-					})	
-				</script>
-				{% endfor %}
-			{% endif %}
+		{% if messages %}
+		{% for message in messages %}
+		<script>
+			Swal.fire({
+				"title": "Felicitaciones",
+				"text": "{{ message }}",
+				"icon": "success"
+			})	
+		</script>
+		{% endfor %}
+		{% endif %}
 
 	</body>
 </html>

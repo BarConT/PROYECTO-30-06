@@ -6,6 +6,7 @@ urlpatterns = [
         path('visualizar/<id>/', views.visualizar, name='visualizar'),
         path('editar/<id>/', views.editar, name='editar'),
         path('borrar/<id>/', views.borrar, name='borrar'),
-        path('categoria/<categoria_id>/', views.categoria, name='categoria')
+        path('categoria/<categoria_id>/', views.categoria, name='categoria'),
+        path('buscar/', views.buscar, name='buscar'),
     ]
 

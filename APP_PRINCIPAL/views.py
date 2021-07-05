@@ -12,7 +12,7 @@ def principal(request):
     page = request.GET.get('page', 1)
     
     try:
-        paginator = Paginator(resto_productos, 5)
+        paginator = Paginator(resto_productos, 7)
         resto_productos = paginator.page(page)
 
     except:

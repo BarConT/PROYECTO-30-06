@@ -1,5 +1,5 @@
 {% extends 'layout.html'%}
-{% load static %}
+
 {% block titulo %}Login{% endblock %}
 
 {% block cuerpo %}
@@ -12,7 +12,8 @@
 		<div class="col-lg-8 offset-lg-2">
 			<div class="card">
 				<div class="card-body">
-					<h1>ACCEDER A LA WEB</h1>
+					<h2>ACCEDER A LA WEB</h2>
+					<hr>
 					{% if form.errors %}
 					<p>Tu nombre de usuario y contraseña no coinciden. Inténtalo de nuevo.</p>
 					{% endif %}
@@ -20,6 +21,7 @@
 					<form action="" method="POST">
 						{% csrf_token %}
 						{{ form | crispy }}
+						<hr>
 						<input type="submit" value="LOGIN" class="btn btn-info">
 						<input type="hidden" name="next" value="{{ next }}" />
 						<a href="{% url 'registro' %}" class="btn btn-info">REGISTRARSE</a>

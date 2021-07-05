@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required, permission_required
 from django.core.paginator import Paginator
 from django.http import Http404
+from django.db.models import Q
 
 # Create your views here.
 
@@ -83,3 +84,17 @@ def categoria(request, categoria_id):
             }
     return render(request, 'categoria.html', data)
 
+def buscar(request):
+
+    queryset = request.GET.get("buscar")
+    if queryset:
+         productos = Producto.objects.filter(
+           Q(titulo__icontains = queryset) |
+           Q(descripcion__icontains = queryset)
+                 ).distinct()
+
+    data = {
+            'productos': productos
+            }
+
+    return render(request, 'resultado.html', data)
