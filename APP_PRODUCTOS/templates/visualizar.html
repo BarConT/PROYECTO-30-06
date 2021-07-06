@@ -52,7 +52,7 @@
 								<h4>Precio: ${{ p.precio | intcomma }}</h4>
 								{% if perms.APP_PRODUCTOS.change_producto %}
 								{% else %}
-								<a href="{% url 'carrito' %}" class="btn btn-info btn-sm">AGREGAR AL  CARRITO</a>
+								<a href="{% url 'agregar_producto' p.id %}" class="btn btn-info btn-sm">AGREGAR AL  CARRITO</a>
 								{% endif %}
 								{% if perms.APP_PRODUCTOS.change_producto %}
 								<a href="{% url 'editar' p.id %}" class="btn btn-info btn-sm">EDITAR</a>

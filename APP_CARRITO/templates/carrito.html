@@ -3,16 +3,56 @@
 {% block titulo %}Carrito{% endblock %}
 
 {% block cuerpo %}
-{% load crispy_forms_tags %}
+
+{% load humanize %}
 
 <br>
 
 <div class="container">
-	<div class="row">
-		<h2>Carrito</h2>
-	</div>
-</div>
+	<h2>Carrito</h2>
+	<h3>@{{ user.username }}</h3>
 
+	<table class="table table-hover">
+
+		<thead>
+			<tr>
+				<th scope="col">PRODUCTO</th>
+				<th scope="col">CANTIDAD</th>
+				<th scope="col">ACCION</th>
+				<th scope="col">SUBTOTAL</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			{% if request.session.carrito.items %}
+			{% for key,value in request.session.carrito.items %}
+			<tr>
+				<th>{{ value.titulo}}</th>
+				<td>{{ value.cantidad }}</td>
+				<td>
+					<a href="{% url 'agregar_producto' value.producto_id %}" class="btn btn-success">+</a>
+					<a href="{% url 'restar_producto' value.producto_id %}" class="btn btn-danger">-</a>
+				</td>
+				<td>${{ value.precio | intcomma }}</td>
+			</tr>
+			{% endfor %}
+			{% else %}
+			<td colspan="5">Carrito vacío, compra algún producto</td>
+			{% endif %}
+		</tbody>
+
+		<tfoot>
+			<tr>
+				<td colspan="5">
+					TOTAL: ${{ importe_total_carrito | intcomma }}
+				</td>
+			</tr>
+		</tfoot>
+	</table>
+
+	<a href="{% url 'vaciar_carrito' %}" class="btn btn-info">VACIAR CARRITO</a>
+	<a href="#" class="btn btn-info">FINALIZAR COMPRA</a>
+</div>
 <br>
 
 {% endblock %}
