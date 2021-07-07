@@ -8,7 +8,7 @@
 <br>
 
 <div class="container">
-	<h1>Listado de productos: {{ request.GET.buscar }}</h1>
+	<h2>Resultado de la búsqueda: {{ request.GET.buscar }}</h2>
 
 	{% if productos %}
 	<div class="list-group">
@@ -20,7 +20,7 @@
 					<p class="mb-1">{{ producto.descripcion }}</p>
 					<small>${{ producto.precio | intcomma }}</small>
 				</div>
-				<img src="{{ producto.imagen.url }}" alt="" style="width:100px">
+				<img src="{{ producto.imagen.url }}" alt="" style="width:100px; height:100px;">
 			</div>
 		</a>
 		{% endfor %}

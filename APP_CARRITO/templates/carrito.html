@@ -27,7 +27,7 @@
 		<tbody>
 			{% if request.session.carrito.items %}
 			{% for key,value in request.session.carrito.items %}
-			<tr>
+			<tr class="detalle">
 				<th scope="row" class="text-center"><a href="{% url 'visualizar' value.producto_id %}" class="text-decoration-none">{{ value.titulo}}</a></th>
 				<td class="text-center">$ {{ value.precio | intcomma }}</td>
 				<td class="text-center">

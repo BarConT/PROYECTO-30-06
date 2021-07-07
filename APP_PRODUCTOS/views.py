@@ -11,8 +11,6 @@ from django.db.models import Q
 
 def visualizar(request, id):
     producto = Producto.objects.all().filter(id=id)
-    print(producto)
-    
 
     data = {
             'producto': producto 

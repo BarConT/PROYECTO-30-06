@@ -12,12 +12,12 @@
 	<h2>Últimos productos</h2>
 	<div class="row d-flex justify-content-between">
 		{% for producto in tres_productos %}
-		<div class="card m-3" style="width: 18rem;">
-			<img src="{{ producto.imagen.url }}" class="card-img-top" alt="{{ producto.titulo }}" style="min-height: 280px">
+		<div class="card m-3 imagen">
+			<img src="{{ producto.imagen.url }}" class="card-img-top" alt="{{ producto.titulo }}" style="height: 280px">
 			<div class="card-body">
-				<h5 class="card-title">{{ producto.titulo | capfirst}}</h5>
+				<h2 class="card-title">{{ producto.titulo | capfirst}}</h2>
 				<h3>${{ producto.precio | intcomma }}</h3>
-				<a href="{% url 'visualizar' producto.id %}" class="btn btn-primary">VER PRODUCTO</a>
+				<a href="{% url 'visualizar' producto.id %}" class="btn btn-info">VER PRODUCTO</a>
 			</div>
 		</div>
 		{% endfor %}
@@ -29,12 +29,12 @@
 		{% for producto in entity %}
 		<a href="{% url 'visualizar' producto.id %}" class="list-group-item list-group-item-action ">
 			<div class="d-flex w-100 justify-content-between">
-				<div>
-					<h5 class="mb-1">{{ producto.titulo }}</h5>
+				<div class="detalle">
+					<h2 class="mb-1">{{ producto.titulo }}</h2>
 					<p class="mb-1">{{ producto.descripcion }}</p>
-					<small>${{ producto.precio | intcomma }}</small>
+					<p>${{ producto.precio | intcomma }}</p>
 				</div>
-				<img src="{{ producto.imagen.url }}" alt="" style="width:100px">
+				<img src="{{ producto.imagen.url }}" alt="{{ producto.titulo }}" style="width:100px; height:100px;">
 			</div>
 		</a>
 		{% endfor %}

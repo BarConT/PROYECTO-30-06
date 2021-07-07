@@ -19,7 +19,8 @@
 			"cancelButtonText": "No, cancelar",
 			"confirmButtonText": "Si, eliminar",
 			"reverseButtons": true,
-			"confirmButtonColor": "#dc3545"
+			"confirmButtonColor": "#dc3545",
+			"cancelButtonColor": "#17a2b8"
 		})
 			.then(function(result){
 				if (result.isConfirmed){
@@ -41,9 +42,9 @@
 				{% for p in producto %}
 
 				<h2>{{ p.titulo }}</h2>
-				<div class="d-flex flex-column flex-lg-row">
+				<div class="d-flex flex-column flex-lg-row detalle">
 					<div>
-						<img src="{{ p.imagen.url }}" alt="" >
+						<img src="{{ p.imagen.url }}" alt="{{ p.titulo}}" style="height:200px; width:200px; margin-right:10px;">
 					</div>
 						<div >
 							{{ p.categoria }}
