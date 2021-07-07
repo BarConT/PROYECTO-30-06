@@ -15,12 +15,13 @@ class Carrito:
                     "precio": str(producto.precio),
                     "cantidad": 1,
                     "imagen": producto.imagen.url,
+                    "subtotal": producto.precio 
                     }
         else:
             for key, value in self.carrito.items():
                 if key == str(producto.id):
                     value["cantidad"] = value["cantidad"] + 1
-                    value["precio"] = int(value["precio"]) + producto.precio
+                    value["subtotal"] = int(value["subtotal"]) + producto.precio
                     break
         self.guardar_carrito()
 
@@ -38,7 +39,7 @@ class Carrito:
         for key, value in self.carrito.items():
             if key == str(producto.id):
                 value["cantidad"] = value["cantidad"] - 1
-                value["precio"] = int(value["precio"]) - producto.precio
+                value["subtotal"] = int(value["subtotal"]) - producto.precio
                 if value["cantidad"] < 1:
                     self.eliminar(producto)
                 break

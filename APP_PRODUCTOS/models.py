@@ -15,6 +15,7 @@ class Producto(models.Model):
     descripcion = models.TextField()
     precio = models.IntegerField()
     categoria = models.ForeignKey(Categoria, on_delete=models.PROTECT)
+    subtotal = models.IntegerField(default=0)
 
     def __str__(self):
         return self.titulo

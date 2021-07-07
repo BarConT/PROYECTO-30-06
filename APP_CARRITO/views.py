@@ -9,6 +9,9 @@ from APP_PRODUCTOS.models import Producto
 def carrito(request):
     return render(request, 'carrito.html')
 
+@login_required
+def pronto(request):
+    return render(request, 'pronto.html')
 
 def agregar_producto(request, producto_id):
     carrito = Carrito(request)
