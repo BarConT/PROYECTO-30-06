@@ -13,7 +13,7 @@
 	<div class="row d-flex justify-content-between">
 		{% for producto in tres_productos %}
 		<div class="card m-3 imagen">
-			<img src="{{ producto.imagen.url }}" class="card-img-top" alt="{{ producto.titulo }}" style="height: 280px">
+			<img src="{{ producto.imagen.url }}" class="card-img-top" alt="{{ producto.titulo }}" style="height: 280px;width: 18rem;">
 			<div class="card-body">
 				<h2 class="card-title">{{ producto.titulo | capfirst}}</h2>
 				<h3>${{ producto.precio | intcomma }}</h3>
